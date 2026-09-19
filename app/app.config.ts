@@ -1,8 +1,8 @@
 export default defineAppConfig({
-  repository: 'nuxt/ui',
+  repository: 'lx521603/changelog',
   ui: {
     colors: {
-      primary: 'green',
+      primary: 'blue',
       neutral: 'slate'
     },
     prose: {
