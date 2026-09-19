@@ -2,28 +2,28 @@
 const appConfig = useAppConfig()
 
 const { data: versions } = await useFetch(
-  computed(() => `https://ungh.cc/repos/${appConfig.repository}/releases`),
+  computed(() => `https://api.github.com/repos/${appConfig.repository}/releases`),
   {
+    headers: {
+      Accept: 'application/vnd.github+json'
+    },
     transform: (data: {
-      releases: {
-        name?: string
-        tag: string
-        publishedAt: string
-        markdown: string
-      }[]
-    }) =>
-      data.releases.map(release => ({
-        tag: release.tag,
-        title: release.name || release.tag,
-        date: release.publishedAt,
-        markdown: release.markdown
+      name?: string
+      tag_name: string
+      published_at: string
+      body: string
+    }[]) =>
+      data.map(release => ({
+        tag: release.tag_name,
+        title: release.name || release.tag_name,
+        date: release.published_at,
+        markdown: release.body
       }))
   }
 )
 
 const title = 'Sai'
-const description =
-  'Sai.st'
+const description = 'Sai.st'
 
 useSeoMeta({
   title,
