@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
-    '@comark/nuxt'
+    '@comark/nuxt',
+    '@nuxt/content'  // ← 加这一行
   ],
 
   devtools: {
