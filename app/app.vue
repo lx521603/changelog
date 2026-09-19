@@ -1,3 +1,10 @@
+<script setup>
+useHead({
+  htmlAttrs: {
+    lang: 'zh-CN'
+  }
+})
+</script>
 <template>
   <UApp>
     <AppHeader />

@@ -6,7 +6,7 @@
 
   <UFooter>
     <p class="text-muted text-sm">
-      Built with Nuxt UI • © {{ new Date().getFullYear() }}
+      Sai.st • © {{ new Date().getFullYear() }}
     </p>
   </UFooter>
 </template>

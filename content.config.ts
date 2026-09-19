@@ -22,9 +22,22 @@ export default defineContentConfig({
         title: z.string(),
         description: z.string(),
         date: z.string(),
-        image: z.any().optional(),
-        badge: z.any().optional(),
-        authors: z.array(z.any()).optional(),
+        image: z.object({
+          src: z.string(),
+          alt: z.string().optional()
+        }).optional(),
+        badge: z.object({
+          label: z.string()
+        }).optional(),
+        authors: z.array(
+          z.object({
+            name: z.string(),
+            to: z.string().optional(),
+            avatar: z.object({
+              src: z.string()
+            }).optional()
+          })
+        ).optional(),
         seo: z.object({
           title: z.string().optional(),
           description: z.string().optional()

@@ -21,9 +21,9 @@ const { data: versions } = await useFetch(
   }
 )
 
-const title = '待编辑'
+const title = 'Sai'
 const description =
-  '待编辑'
+  'Sai.st'
 
 useSeoMeta({
   title,
@@ -36,7 +36,7 @@ useSeoMeta({
 <template>
   <UContainer>
     <UPageHeader
-      title="待编辑"
+      title="Changelog"
       description="知之真切笃实处即是行，行之明觉精察处即是知"
       class="py-[50px]"
     />
@@ -53,7 +53,11 @@ useSeoMeta({
           v-for="version in versions"
           :key="version.tag"
           :title="version.title"
-          :date="version.date"
+          :date="new Date(version.date).toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })"
           :tag="version.tag"
           :ui="{
             container: 'max-w-full sm:max-w-xl lg:max-w-2xl min-w-0 lg:ms-72',

@@ -32,3 +32,16 @@ html.dark .shiki span {
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
+/* 多图并排：段落里有 ≥2 张图时，用 grid 横向排列 */
+p:has(> img + img) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+p:has(> img + img) img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
