@@ -36,7 +36,7 @@ useSeoMeta({
 <template>
   <UContainer>
     <UPageHeader
-      title="Changelog"
+      title="Log"
       description="收集生活中一切值得驻足的美好与趣味"
       class="py-2 sm:py-8"
     />
