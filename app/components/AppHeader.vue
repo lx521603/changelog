@@ -32,6 +32,13 @@ const items = [
 
     <template #right>
       <UColorModeButton />
+      <UButton
+        label="Get started"
+        color="neutral"
+        class="hidden lg:flex"
+        to="mailto:x@sai.st"
+        target="_blank"
+      />
     </template>
 
     <template #body>
