@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui',
     '@comark/nuxt',
-    '@nuxt/content'  // ← 加这一行
+    '@nuxt/content' 
   ],
 
   devtools: {
