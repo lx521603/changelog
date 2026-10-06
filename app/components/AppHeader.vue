@@ -33,7 +33,7 @@ const items = [
     <template #right>
       <UColorModeButton />
       <UButton
-        label="Get started"
+        label="联系我"
         color="neutral"
         class="hidden lg:flex"
         to="mailto:x@sai.st"
@@ -49,6 +49,29 @@ const items = [
       />
 
       <USeparator class="my-6" />
+    </template>
+    <template #body>
+      <UNavigationMenu
+        :items="items"
+        orientation="vertical"
+      />
+
+      <div class="mt-4 flex flex-col gap-2">
+       <!--      
+       <UButton
+          label="Sign in"
+          color="neutral"
+          variant="soft"
+          block
+        />
+        -->
+        <UButton
+          label="联系我"
+          block
+          to="mailto:x@sai.st"
+          target="_blank"
+        />
+      </div>
     </template>
   </UHeader>
 </template>
