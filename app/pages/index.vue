@@ -33,8 +33,8 @@ useSeoMeta({
 <template>
   <UContainer>
     <UPageHeader
-      title="Log"
-      description="收集生活中一切值得驻足的美好与趣味"
+      title="精彩瞬间"
+      description="跨越山海的足迹，与不期而遇的风景。每一次出发，都是为了收集世界的奇妙切片。"
       class="py-2 sm:py-8"
     />
 
