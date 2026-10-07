@@ -26,8 +26,13 @@ export default defineNuxtConfig({
       }
     }
   },
-routeRules: {
-  '/': { prerender: true }
+nitro: {
+  prerender: {
+    routes: [
+      '/'
+    ],
+    crawlLinks: true
+  }
 },
   compatibilityDate: '2026-06-30',
 
