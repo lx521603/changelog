@@ -1,0 +1,69 @@
+name: Deploy Nuxt to VPS
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # 自动读取 package.json 中的 packageManager 字段
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Nuxt project
+        run: pnpm build
+        
+      # 🌟 核心步骤：使用 rsync 优雅同步
+      - name: Deploy .output to VPS (rsync)
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.VPS_HOST }}
+          REMOTE_USER: ${{ secrets.VPS_USER }}
+          
+          # ⚠️ 关键细节：SOURCE 末尾必须有斜杠 "/"
+          # 这表示：把 .output 目录【里面的所有内容】同步过去
+          # 而不是把 .output 这个文件夹本身同步过去（避免变成 /opt/my-nuxt-app/.output/）
+          SOURCE: ".output/" 
+          
+          # 👇 这里直接写死你的 VPS 目标绝对路径（请根据你的实际情况修改）
+          TARGET: "/opt/changelog/"
+          
+          # -avz: 归档、显示过程、压缩传输
+          # --delete: 极其重要！删除 VPS 上存在但新构建产物中不存在的旧文件，保持绝对干净
+          ARGS: "-avz --delete"
+
+      # 🌟 核心步骤：在 VPS 上平滑重启 PM2 服务
+      - name: Restart PM2 service on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # 切换到目标目录
+            cd /opt/changelog/
+            
+            echo "=== 优雅重启 Nuxt 服务 ==="
+            # 逻辑：如果进程 'nuxt-app' 存在则重启，如果是第一次部署不存在，则直接启动它
+            pm2 restart changelog-app --update-env || PORT=3003 pm2 start server/index.mjs --name "changelog-app"
+            
+            # 保存 PM2 状态，确保 VPS 重启后服务能自启
+            pm2 save
+            
+            echo "✅ Nuxt 部署完成！当前状态："
+            pm2 status
