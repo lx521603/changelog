@@ -34,7 +34,8 @@ useSeoMeta({
       <UChangelogVersions
         :indicator-motion="false"
         :ui="{
-          root: 'pt-0 pb-8',
+          // 建议：给外层也加上适当的上下间距，让滚动更有呼吸感
+          root: 'py-16 sm:py-24 lg:py-32', 
           indicator: 'inset-y-0'
         }"
       >
@@ -53,7 +54,9 @@ useSeoMeta({
             header: 'border-b border-default pb-4',
             title: 'text-3xl',
             date: 'text-xs/9 text-highlighted font-mono',
-            indicator: 'sticky top-0'
+            
+            // 🌟 核心修复：把完整的 sticky 魔法类加回来！
+            indicator: 'sticky top-0 pt-16 -mt-16 sm:pt-24 sm:-mt-24 lg:pt-32 lg:-mt-32'
           }"
         >
           <template #body>
