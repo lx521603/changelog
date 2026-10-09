@@ -55,6 +55,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            echo "MY_GITHUB_TOKEN=${{ secrets.MY_GITHUB_TOKEN }}" > /opt/changelog/.env
             # 切换到目标目录
             cd /opt/changelog/
             

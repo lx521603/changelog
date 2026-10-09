@@ -26,6 +26,12 @@ export default defineNuxtConfig({
       }
     }
   },
+
+  runtimeConfig: {
+    // 👇 这里改成读取 MY_GITHUB_TOKEN
+    githubToken: process.env.MY_GITHUB_TOKEN || ''
+  },
+  
 nitro: {
   prerender: {
     routes: [
